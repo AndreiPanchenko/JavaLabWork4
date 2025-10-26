@@ -242,7 +242,7 @@ public class Main {
       System.out.println("Начальная точка после сдвига: " + line.getStart());
 
       // Демонстрация с обобщенной линией
-      System.out.println("\n=== Сдвиг обобщенной 3D линии ===");
+      System.out.println("=== Сдвиг обобщенной 3D линии ===");
       Point3D start3D = new Point3D(5, 2, 1);
       Point3D end3D = new Point3D(10, 8, 3);
       LineGeneric<Point3D> line3D = new LineGeneric<>(start3D, end3D);
@@ -251,36 +251,140 @@ public class Main {
       LineUtils.shiftLineStartX(line3D);
       System.out.println("3D Линия после сдвига: " + line3D);
 
-      // Интерактивная часть с подробным выводом
-      System.out.println("\n=== Интерактивная часть ===");
-      System.out.println("Создайте линию для сдвига:");
+      // Демонстрация с обобщенной 2D линией
+      System.out.println("=== Сдвиг обобщенной 2D линии ===");
+      Point start2D = new Point(5, 2);
+      Point end2D = new Point(10, 8);
+      LineGeneric<Point> line2D = new LineGeneric<>(start2D, end2D);
 
-      System.out.println("Введите координаты начала (x y):");
-      double x1 = InputChecker.getDouble("x1: ");
-      double y1 = InputChecker.getDouble("y1: ");
-      System.out.println("Введите координаты конца (x y):");
-      double x2 = InputChecker.getDouble("x2: ");
-      double y2 = InputChecker.getDouble("y2: ");
-
-      Point userStart = new Point(x1, y1);
-      Point userEnd = new Point(x2, y2);
-      Line userLine = new Line(userStart, userEnd);
-
-      System.out.println(">>> Создана линия: " + userLine);
-      System.out.println(">>> Начальная точка до сдвига: " + userLine.getStart());
-      System.out.println(">>> Координата X до сдвига: " + userLine.getStart().getX());
+      System.out.println("2D Линия до сдвига: " + line2D);
+      System.out.println("Начальная точка до сдвига: " + line2D.getStart());
+      System.out.println("Координата X до сдвига: " + line2D.getStart().getX());
 
       // ВЫПОЛНЯЕМ СДВИГ
-      LineUtils.shiftLineStartX(userLine);
+      LineUtils.shiftLineStartX(line2D);
 
-      System.out.println(">>> Линия после сдвига: " + userLine);
-      System.out.println(">>> Начальная точка после сдвига: " + userLine.getStart());
-      System.out.println(">>> Координата X после сдвига: " + userLine.getStart().getX());
-      System.out.println(">>> Изменение координаты X: " + (userLine.getStart().getX() - x1));
+      System.out.println("2D Линия после сдвига: " + line2D);
+      System.out.println("Начальная точка после сдвига: " + line2D.getStart());
+      System.out.println("Координата X после сдвига: " + line2D.getStart().getX());
+      System.out.println("Изменение координаты X: " + (line2D.getStart().getX() - 5));
+
+      // Интерактивная часть с выбором типа линии
+      System.out.println("=== Интерактивная часть ===");
+      System.out.println("Создайте линию для сдвига:");
+
+      System.out.println("Выберите тип линии:");
+      System.out.println("1 - Обычная 2D линия");
+      System.out.println("2 - Обобщённая 2D линия");
+      System.out.println("3 - Обобщённая 3D линия");
+      int typeChoice = InputChecker.getIntInRange("Ваш выбор: ", 1, 3);
+
+      switch (typeChoice) {
+        case 1:
+          interactiveShiftRegular2D();
+          break;
+        case 2:
+          interactiveShiftGeneric2D();
+          break;
+        case 3:
+          interactiveShiftGeneric3D();
+          break;
+      }
 
     } catch (Exception e) {
       System.out.println("Ошибка при сдвиге линии: " + e.getMessage());
     }
+  }
+
+  // Метод для интерактивного сдвига обычной 2D линии
+  private static void interactiveShiftRegular2D() {
+    System.out.println("=== Создание обычной 2D линии ===");
+
+    System.out.println("Введите координаты начала (x y):");
+    double x1 = InputChecker.getDouble("x1: ");
+    double y1 = InputChecker.getDouble("y1: ");
+    System.out.println("Введите координаты конца (x y):");
+    double x2 = InputChecker.getDouble("x2: ");
+    double y2 = InputChecker.getDouble("y2: ");
+
+    Point userStart = new Point(x1, y1);
+    Point userEnd = new Point(x2, y2);
+    Line userLine = new Line(userStart, userEnd);
+
+    System.out.println(">>> Создана обычная 2D линия: " + userLine);
+    System.out.println(">>> Начальная точка до сдвига: " + userLine.getStart());
+    System.out.println(">>> Координата X до сдвига: " + userLine.getStart().getX());
+
+    // ВЫПОЛНЯЕМ СДВИГ
+    LineUtils.shiftLineStartX(userLine);
+
+    System.out.println(">>> Линия после сдвига: " + userLine);
+    System.out.println(">>> Начальная точка после сдвига: " + userLine.getStart());
+    System.out.println(">>> Координата X после сдвига: " + userLine.getStart().getX());
+    System.out.println(">>> Изменение координаты X: " + (userLine.getStart().getX() - x1));
+  }
+
+  // Метод для интерактивного сдвига обобщённой 2D линии
+  private static void interactiveShiftGeneric2D() {
+    System.out.println("=== Создание обобщённой 2D линии ===");
+
+    System.out.println("Введите координаты начала (x y):");
+    double x1 = InputChecker.getDouble("x1: ");
+    double y1 = InputChecker.getDouble("y1: ");
+    System.out.println("Введите координаты конца (x y):");
+    double x2 = InputChecker.getDouble("x2: ");
+    double y2 = InputChecker.getDouble("y2: ");
+
+    Point userStart = new Point(x1, y1);
+    Point userEnd = new Point(x2, y2);
+    LineGeneric<Point> userLine = new LineGeneric<>(userStart, userEnd);
+
+    System.out.println(">>> Создана обобщённая 2D линия: " + userLine);
+    System.out.println(">>> Начальная точка до сдвига: " + userLine.getStart());
+    System.out.println(">>> Координата X до сдвига: " + userLine.getStart().getX());
+    System.out.println(">>> Тип точки: " + userLine.getStart().getClass().getSimpleName());
+
+    // ВЫПОЛНЯЕМ СДВИГ
+    LineUtils.shiftLineStartX(userLine);
+
+    System.out.println(">>> Линия после сдвига: " + userLine);
+    System.out.println(">>> Начальная точка после сдвига: " + userLine.getStart());
+    System.out.println(">>> Координата X после сдвига: " + userLine.getStart().getX());
+    System.out.println(">>> Изменение координаты X: " + (userLine.getStart().getX() - x1));
+  }
+
+  // Метод для интерактивного сдвига обобщённой 3D линии
+  private static void interactiveShiftGeneric3D() {
+    System.out.println("=== Создание обобщённой 3D линии ===");
+
+    System.out.println("Введите координаты начала (x y z):");
+    double x1 = InputChecker.getDouble("x1: ");
+    double y1 = InputChecker.getDouble("y1: ");
+    double z1 = InputChecker.getDouble("z1: ");
+    System.out.println("Введите координаты конца (x y z):");
+    double x2 = InputChecker.getDouble("x2: ");
+    double y2 = InputChecker.getDouble("y2: ");
+    double z2 = InputChecker.getDouble("z2: ");
+
+    Point3D userStart = new Point3D(x1, y1, z1);
+    Point3D userEnd = new Point3D(x2, y2, z2);
+    LineGeneric<Point3D> userLine = new LineGeneric<>(userStart, userEnd);
+
+    System.out.println(">>> Создана обобщённая 3D линия: " + userLine);
+    System.out.println(">>> Начальная точка до сдвига: " + userLine.getStart());
+    System.out.println(">>> Координата X до сдвига: " + userLine.getStart().getX());
+    System.out.println(">>> Координата Z до сдвига: " + userLine.getStart().getZ());
+    System.out.println(">>> Тип точки: " + userLine.getStart().getClass().getSimpleName());
+
+    // ВЫПОЛНЯЕМ СДВИГ
+    LineUtils.shiftLineStartX(userLine);
+
+    System.out.println(">>> Линия после сдвига: " + userLine);
+    System.out.println(">>> Начальная точка после сдвига: " + userLine.getStart());
+    System.out.println(">>> Координата X после сдвига: " + userLine.getStart().getX());
+    System.out.println(">>> Координата Z после сдвига: " + userLine.getStart().getZ());
+    System.out.println(">>> Изменение координаты X: " + (userLine.getStart().getX() - x1));
+    System.out.println(">>> Координата Y и Z не изменились: Y=" + userLine.getStart().getY() + ", Z=" + userLine.getStart().getZ());
   }
 
   // ЗАДАНИЕ 3.1 - Map
@@ -1051,4 +1155,5 @@ public class Main {
       System.out.println("   \"" + str + "\" -> " + status + " -> Текущий набор: " + processSet);
     }
   }
+
 }
